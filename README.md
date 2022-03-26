@@ -48,7 +48,7 @@ public:
 ```
 
 ### Another Solution
-```
+```c++
 class Solution 
 {
 public:
