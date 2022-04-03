@@ -78,3 +78,66 @@ public:
     };
 };
 ```
+
+## 3Sum
+
+### Solution
+```c++
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) 
+    {
+    
+        vector<vector <int>> res;
+
+        vector<int> temp_res;
+
+        sort(nums.begin(), nums.end());
+        
+        int i;
+    
+        for (auto it = nums.begin(); it != nums.end(); ++it)
+        {   
+            i = distance(nums.begin(), it);
+            if (nums[i] > 0)
+            {
+                break;
+            }
+            if (i > 0 and nums[i] == nums[i-1])
+            {
+                continue;
+            }
+
+            int l = i + 1, r = distance(nums.begin(), nums.end()) - 1;
+            while (l < r)
+            {
+                int threeSum = nums[i] + nums[l] + nums[r];
+            
+                if (threeSum > 0)  
+                {
+                    --r;
+                }
+                else if (threeSum < 0)
+                {   
+                    ++l;
+                }   
+                else 
+                {   
+                    temp_res.push_back(nums[i]);
+                    temp_res.push_back(nums[l]);
+                    temp_res.push_back(nums[r]);
+                    res.push_back(temp_res);
+                    temp_res = {};
+                    ++l;
+                    while (nums[l] == nums[l-1] && l < r)
+                    {   
+                        ++l;
+                    };
+                };   
+            };   
+        };
+        return res;
+    };    
+};
+
+```
