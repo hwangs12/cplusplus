@@ -141,3 +141,50 @@ public:
 };
 
 ```
+
+## Letter Combinations
+
+### Solution
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
+
+using namespace std;
+
+vector<string> letterCombinations(string digits) {
+    vector<string> table
+    = { "0", "1", "abc", "def", "ghi", 
+        "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    vector<string> list;
+    queue<string> q;
+    q.push("");
+    
+    while (!q.empty()) 
+    {
+        string s = q.front();
+        q.pop();
+
+        // If complete word is generated
+        // push it in the list
+        if (s.length() == digits.length())
+        {
+            list.push_back(s);
+        }
+        else
+        {
+            // Try all possible letters for current digit
+            // in number[]
+            int index = digits[s.length()] - '0';
+            for (auto letter : table[index])
+            {
+                q.push(s + letter);
+            }   
+        }
+    }
+    
+    return list;
+}
+```
